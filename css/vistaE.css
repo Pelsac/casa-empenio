@@ -1,0 +1,176 @@
+*{
+    padding: 0%;
+    margin: 0;
+    font-family: 'Times New Roman';
+}
+
+body{
+    min-height: 90vh;
+    
+}
+
+header{
+    height: 122px;
+    background-color:rgb(5, 107, 197);
+}
+
+
+header ul{
+    margin-top: 45px;
+    margin-right: 49px;
+    float: right;
+   
+}
+header #titulo{
+    float: left;
+    color: floralwhite;
+    padding: 20px;
+}
+
+header img{
+    width: 100px;
+    height: 80px;
+    margin: 20px;
+    float: left;
+ 
+}
+
+header ul a{
+   color: blanchedalmond;
+   text-decoration: none;
+   margin-left: 34px;
+ 
+}
+
+#container{
+    min-height: 86vh;
+    background-color: rgb(107, 194, 194);
+    float: left;
+    width:100%;
+}
+
+#container .formularioEmpleado{
+    width:700px;
+    height: 600px;
+    margin: 80px 80px 0 10px;
+    margin-left: 340px;
+    padding: 100px;
+    background-color: #fff;
+}
+
+
+*/
+#container .formularioEmpleado form  .selecion{
+    width: 200px;
+    height: 30px;
+  
+ }
+
+ #container .formularioEmpleado form .fecha{
+    width: 150px;
+    height: 50px;
+    margin-top:0px;
+   
+  
+ }
+
+ 
+ #container .formularioEmpleado form .nombre{
+    width: 100px;
+    height: 50px;
+    margin-top:-60px;
+    margin-left: 270px;
+  
+ }
+
+ #container .formularioEmpleado form .apellido{
+    width: 150px;
+    height: 50px;
+    margin-top: -20px;
+  
+ }
+
+ #container .formularioEmpleado form .celular{
+    width: 100px;
+    height: 50px;
+    margin-top:-50px;
+    margin-left: 270px;
+  
+ }
+
+ #container .formularioEmpleado form .correo{
+    width: 200px;
+    height: 100px;
+    margin-top: -20px;
+  
+ }
+ #container .formularioEmpleado form .password{
+    width: 200px;
+    height: 100px;
+    margin-top:-60px;
+    margin-left: 270px;
+  
+ }
+ #container .formularioEmpleado form .domicilio{
+    width: 100px;
+    height: 50px;
+    margin-top:-120px;
+    margin-left: 270px;
+  
+ }
+
+ #container .formularioEmpleado h2{
+   text-align: center;
+   margin-top: -90px;
+  
+ }
+ #container .formularioEmpleado form .rol{
+    
+   width: 470px;
+   height: 50px;
+   margin-top: -30px;
+
+  
+
+ 
+}
+
+ 
+ input[type="text"],
+ input[type="date"],
+ input[type="number"]{
+    width: 200px;
+    height: 35px;
+ }
+
+ #container .formularioEmpleado form .buton{
+  
+    width: 100px;
+    height: 100px;
+    margin-top: 50px;
+    margin-left: -180px;
+ }
+
+ #container .formularioEmpleado form #cancelar{
+    
+     margin-top: 23px;
+     float: right;
+     margin-right: -200px;
+     margin-top: 1px;
+     background-color: rgb(204, 19, 6);
+     color:#fff;
+   
+ }
+
+ 
+ 
+ 
+ footer{
+    height: 18px;
+    background-color: rgb(199, 241, 247);
+    clear: both;
+}
+footer p{
+    text-align: center;
+    color: #000;
+}

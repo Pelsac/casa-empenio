@@ -1,0 +1,160 @@
+*{
+    padding: 0%;
+    margin: 0;
+    font-family: 'Times New Roman';
+}
+
+body{
+    min-height: 90vh;
+    
+}
+
+header{
+    height: 122px;
+    background-color:rgb(5, 107, 197);
+}
+
+
+header ul{
+    margin-top: 45px;
+    margin-right: 49px;
+    float: right;
+   
+}
+header #titulo{
+    float: left;
+    color: floralwhite;
+    padding: 20px;
+}
+
+header img{
+    width: 100px;
+    height: 80px;
+    margin: 20px;
+    float: left;
+ 
+}
+
+header ul a{
+   color: blanchedalmond;
+   text-decoration: none;
+   margin-left: 34px;
+ 
+}
+
+#container{
+    min-height: 86vh;
+    background-color: rgb(107, 194, 194);
+    float: left;
+    width:100%;
+}
+
+#container .formularioEmpeno{
+    width:700px;
+    height: 600px;
+    margin: 80px 80px 0 10px;
+    margin-left: 340px;
+    padding: 100px;
+    background-color: #fff;
+}
+
+#container .formularioEmpeno form .rol{
+    width: 200px;
+    height: 100px;
+    margin-top: 30px;
+  
+   
+ }
+
+#container .formularioEmpeno form .producto{
+   float: right;
+   margin-top:-94px;
+   padding: 34px;
+   
+}
+
+#container .formularioEmpeno form  .selecion{
+    width: 200px;
+    height: 30px;
+  
+ }
+
+ #container .formularioEmpeno form .fecha{
+    width: 150px;
+    height: 50px;
+    margin-top:0px;
+   
+  
+ }
+
+ 
+ #container .formularioEmpeno form .precio{
+    width: 100px;
+    height: 50px;
+    margin-top:4px;
+    margin-left: 270px;
+  
+ }
+
+ #container .formularioEmpeno form .descripcion{
+    width: 150px;
+    height: 50px;
+    margin-top: -20px;
+  
+ }
+
+ #container .formularioEmpeno form .fecha-final{
+    width: 100px;
+    height: 50px;
+    margin-top:15px;
+    margin-left: 270px;
+  
+ }
+
+ #container .formularioEmpeno form .desc{
+    width: 200px;
+    height: 100px;
+ 
+  
+ }
+
+ #container .formularioEmpeno h2{
+   text-align: center;
+   margin-top: -50px;
+  
+ }
+ input[type="text"],
+ input[type="date"],
+ input[type="number"]{
+    width: 200px;
+    height: 35px;
+ }
+
+
+ 
+ #container .formularioEmpeno form .buton{
+    width: 200px;
+    height: 100px;
+    margin-top: 100px;
+ }
+
+ #container .formularioEmpeno form #cancelar{
+    
+     margin-top: 23px;
+     float: right;
+     margin-right: -294px;
+     margin-top: 1px;
+     background-color: red;
+     color:#fff;
+   
+ }
+ 
+ footer{
+    height: 18px;
+    background-color: rgb(199, 241, 247);
+    clear: both;
+}
+footer p{
+    text-align: center;
+    color: #000;
+}

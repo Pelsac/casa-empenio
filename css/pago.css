@@ -1,0 +1,133 @@
+*{
+    padding: 0%;
+    margin: 0;
+    font-family: 'Times New Roman';
+}
+
+body{
+    min-height: 90vh;
+}
+
+header{
+    height: 122px;
+    background-color:rgb(5, 107, 197);
+    display: flex;
+    flex-direction: row;
+}
+
+.varra .error{
+  
+     margin-left: 50px;
+}
+header #titulo{
+    float: left;
+    color: floralwhite;
+    padding: 20px;
+}
+
+header img{
+    width: 100px;
+    height: 80px;
+    margin: 20px;
+    float: left;
+ 
+}
+
+header ul{
+  margin-top: 45px;
+  margin-right: 49px;
+  float: right;
+ 
+}
+
+header ul a{
+  color: blanchedalmond;
+  text-decoration: none;
+  margin-left: 34px;
+
+} 
+
+.varra{
+    height: 70px;
+    width: 100%;
+    float: right;
+    margin-left: 120px;
+    padding: 10px;
+    background-color:#fff;
+    display: flex;
+    flex-direction: row;
+   
+}
+.varra form {
+    height: 20px;
+    margin-left: 34px;
+    background-color: #fff;
+    justify-content: center;
+    margin-top: -10px;
+}
+.varra form #buscar{
+    width: 100px;
+    height: 36px;
+    margin-top:-54px;
+    margin-left: 230px;
+}
+aside{
+    width: 100%;
+    height: 60px;
+  }
+
+
+ aside .form_RegistrarPago{
+      margin: 34px;
+      margin-top: 50px;
+      padding: auto;
+    background-color: #fff;
+  
+}
+
+
+ aside .form_RegistrarPago .formul #cancelar{
+  
+  background-color: red;
+  color: #fff;
+  margin-left: 45px;
+
+}
+
+  #container{
+    min-height: 80vh;
+    background-color: rgb(107, 194, 194);
+    float: left;
+    width:100%;
+   
+}
+
+nav .pago{
+    margin-top: 40px;
+    color: #000;
+    font-size: 23px;
+    margin: auto;
+
+
+}
+#tabla{
+    padding-top: 100px;
+    width: 50%;
+    margin-bottom: 1rem;
+    margin-left: 300px;
+    margin-top: -60px;
+
+    color: #212529;
+  
+
+}
+
+footer{
+    height: 18px;
+    background-color: rgb(199, 241, 247);
+    clear: both;
+}
+footer p{
+    text-align: center;
+    color: #000;
+}

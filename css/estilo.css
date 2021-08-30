@@ -1,0 +1,151 @@
+*{
+    padding: 0%;
+    margin: 0;
+    font-family: 'Times New Roman';
+}
+
+body{
+    min-height: 90vh;
+}
+
+header{
+    height: 100px;
+    background-color:rgb(5, 107, 197);
+    display: flex;
+    flex-direction: row;
+}
+
+
+header #titulo{
+    float: left;
+    color: floralwhite;
+    padding: 20px;
+}
+
+header img{
+    width: 100px;
+    height: 80px;
+    margin: 20px;
+    float: left;
+ 
+}
+
+header ul{
+  margin-top: 45px;
+  margin-right: 49px;
+  float: right;
+ 
+}
+
+header ul a{
+  color: blanchedalmond;
+  text-decoration: none;
+  margin-left: 34px;
+
+} 
+
+nav{
+    height: 22px;
+    background-color:rgb(5, 107, 197);
+}
+
+  #container{
+    min-height: 80vh;
+    background-color: rgb(107, 194, 194);
+    float: left;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#container .formulario{
+    width:500px;
+    margin: 40px 80px 0 10px;
+    margin-left: 430px;
+    padding: 60px;
+  
+}
+
+#container .formulario{
+    background-color: #fff;
+}
+
+#container .formulario .mensaje{
+
+    color: #fff;
+    background-color: red;
+}
+#container .formulario #registrar{
+    padding: 10px;
+    width: -100px;
+    margin-top: 6px;
+}
+#container .formulario form #cancelar{
+    
+  margin-top: 23px;
+  margin-top: 6px;
+  background-color: red;
+  color:#fff;
+
+}
+
+footer{
+    height: 18px;
+    background-color: rgb(199, 241, 247);
+    clear: both;
+}
+footer p{
+    text-align: center;
+    color: #000;
+}
+
+@media screen and (max-width: 768px) {
+  header{
+     flex-direction: column;
+     width: 100%;
+   }
+  }
+  @media screen and (max-width: 490px) {
+     header img{
+       width: 200px;
+       height: 200px;
+       float: left;
+     }
+     header ul a{
+      font-size: 23px;
+    } 
+ 
+    }
+
+  @media screen and (max-width: 1056px) {
+    header ul a{
+    color: #000;
+    text-decoration: none;
+   
+  
+  } 
+
+  #container .formulario{
+    width:250px;
+    margin-left: 230px;
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 595px) {
+  header ul{
+
+  text-decoration: none;
+  display: flex;
+   flex-direction: column;
+   float: left;
+     margin-left:0px;
+} 
+
+#container .formulario{
+margin-left: auto;
+margin: 20px;
+width: 100%;
+}
+}
