@@ -50,10 +50,11 @@ class Cliente extends Conexion{
            
            foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
           
-           echo json_encode('Encontrado');
-           return $numero_registro;
+           echo json_encode("existe");
+        return $matriz;
+ 
        }else{
-         
+     
          return -1;
        }
 
@@ -64,10 +65,13 @@ class Cliente extends Conexion{
    }
 }
 }
+
+
 $oCliente =new Cliente();
+$idc=$_POST['cedula'];
 if(isset($_POST['registrar'])){
 
-   $idc=$_POST['cedula'];
+
    $nombrec=$_POST['nombre'];
    $apellidoc=$_POST['apellido'];
    $telefonoc=$_POST['celular'];
@@ -79,9 +83,8 @@ $oCliente->registrarcliente($idc,$nombrec,$apellidoc,$telefonoc,$emailc);
 }
 
 }elseif (isset($_POST['buscar'])) {
-   $oCliente->buscarCliente($_POST['username']);
+   $oCliente->buscarCliente($idc);
 }
-
 
 
 ?>
