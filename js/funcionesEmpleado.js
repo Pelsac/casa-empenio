@@ -51,12 +51,12 @@
            Registro exitoso !!
       </div>
       `;
-      mensaje.style.display='block';
+     formulario.reset();
        console.log('Datos Insertados');
      }else{
       mensaje.innerHTML = `
       <div class="alert alert-danger" role="alert">
-            El empleado ya se encuentra regsitrado !!
+            El empleado ya se encuentra registrado !!
       </div>
       `;
       mensaje.style.display='block';
@@ -120,19 +120,21 @@ function VerificarUsuario(){
  })
  .then( res => res.json())
  .then( data => {
-   if(data==='no'){
+   if(data==='No'){
   
     verificarCampos();
    }else{
     mensaje.innerHTML = `
     <div class="alert alert-danger" role="alert">
-              El username ya exister!
+              El username ya existe!
     </div>
     `;
+    
     mensaje.style.display='block';
     setTimeout(() => {
       mensaje.style.display='none';
     }, 2000);
+    console.log("Existe");
 }
  }
 

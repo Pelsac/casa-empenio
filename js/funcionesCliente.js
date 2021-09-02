@@ -33,6 +33,7 @@ let reg=true;
         .then( data => {
           if(data==='Si'){
             formulario.reset()
+           
             mensaje.innerHTML=`<div class="alert alert-danger" >Registro Exitoso</div>`;  
             console.log('Datos Insertados');
                       

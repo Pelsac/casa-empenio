@@ -1,11 +1,10 @@
 <?php
 require_once("../php/autoload.php");
  $oEstanteria= new Estanteria();
- $consult=$oEstanteria->consultarEstanteria();
- $fil=array();
+ $consultE=$oEstanteria->consultarEstanterias();
 
-
- ?>
+ 
+  ?>
 
 
 <!DOCTYPE html>
@@ -70,46 +69,47 @@ require_once("../php/autoload.php");
              </div>
              <div class="fecha-final">
                  <label for="fecha">Fecha final</label><br>
-                 <input type="date" class="form-control" id="fecha-final" name="fechafinal">
+                 <input type="date" class="form-control" id="fechafinal" name="fechafinal" >
              </div>
 
-             <div class="rol">
-             <label for="rol">Seleccionar estanteria</label>
+             <div class="estanteria">
+             <label for="estanteria">Seleccionar estanteria</label>
              <style> option{font-size:15px}</style>
-             <select name="rol" id="rol" class="custom-select">
-             <option selected value="">Selecione una opcion</option>
+             <select name="estanteria" id="estanteria" class="custom-select">
+             <option selected value=0>Selecione una opcion</option>
              <?php
-             foreach ($consult as $valores):
-                echo '<option value="'.$valores["id"].'">'.$valores["nombre"].'</option>';
-                endforeach;
+             foreach ($consultE as $valores):
+                $nombre=$valores['nombre'];
+                            
+                if($nombre!="Ventas" ) {
+               
+               echo '<option value="'.$valores["id"].'">'.$valores["nombre"].'</option>';
+               
+             
+            }
+        endforeach;
+       
              ?>
   
              </select>
              </div>
-
-             <div class="fila-colum">
-             <label for="fila-colum">Seleccionar estanteria</label>
-             <style> option{font-size:15px}</style>
-             <select name="fila-colum" id="fila-colum" class="custom-select">
-             <option selected value="">Selecione una ubicacion</option>
-             <?
-               foreach ($fil as $valores):
-                echo '<option value="'.$valores.'">'.$valores["nombre"].'</option>';
-                endforeach;
-             ?>
-
-             </select>
+             <div class="ubicacion">
+             <label for="id">Ubicacion</label><br>
+             <input type="text" class="form-control" id="ubicacion" name="ubicacion" disabled>
              </div>
-            
 
             <div class="buton">
-              <button  type="submit" class="btn btn-primary form-control">Envia</button>
+              <button  type="submit" class="btn btn-primary form-control">Registrar</button>
               
               
               <button type="reset" class="btn form-control" id="cancelar">Cancelar</button>
              </div>
 
-             <button class="btn btn-primary  form-control" id="verificar">Verificar</button>
+             <button class="btn btn-primary  form-control" id="verificar">Verificar Cliente</button>
+             <button class="btn btn-primary  form-control" id="asignar">Asignar Ubicacion</button>
+
+           
+
          </form>
       
         
@@ -120,7 +120,9 @@ require_once("../php/autoload.php");
     </aside>
 
     <footer><p>Casa de empeño &</p></footer>
-    <script src="../js/funcionesProducto.js"></script>
+    <script src="../js/funcionesProducto.js">
+   
+</script>
   
 </body>
 </html>

@@ -70,18 +70,18 @@ class Usuario extends Conexion{
         try{
        
          $matriz = array();
-          $sql="SELECT * FROM `usuario` WHERE username = '$id'";
+          $sql="SELECT * FROM `usuario` WHERE username = BINARY '$id'";
           $resultado=$this->conexion->prepare($sql);
           $resultado->execute();
           $numero_registro=$resultado->rowCount();
           if($numero_registro!=0){
               
               foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
-              echo json_encode($matriz);
+              echo json_encode("Si");
            
                 
           }else{
-            echo json_encode('no');
+            echo json_encode('No');
           }
    
       }catch(Exception $e){

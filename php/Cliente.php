@@ -54,7 +54,7 @@ class Cliente extends Conexion{
         return $matriz;
  
        }else{
-     
+         echo json_encode("no");
          return -1;
        }
 

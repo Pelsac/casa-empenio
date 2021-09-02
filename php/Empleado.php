@@ -30,6 +30,7 @@ class Empleado extends Conexion{
         $resultado=$this->conexion->prepare($sql);
          
         $resultado->execute();
+      
         return 1;
         } catch(Exception $e){
            die("Error" . $e->getMessage());
@@ -43,7 +44,7 @@ class Empleado extends Conexion{
         try{
         $this->Cedula=$id;
          $matriz = array();
-          $sql="SELECT * FROM `empleado` WHERE cedula = '$this->Cedula'";
+          $sql="SELECT * FROM `empleado` WHERE cedula = BINARY '$this->Cedula'";
           $resultado=$this->conexion->prepare($sql);
           $resultado->execute();
           $numero_registro=$resultado->rowCount();

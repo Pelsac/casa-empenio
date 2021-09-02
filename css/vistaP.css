@@ -58,9 +58,10 @@ header ul a{
     background-color: #fff;
 }
 
-#container .formularioEmpeno form .rol{
-    width: 200px;
-    height: 100px;
+#container .formularioEmpeno form .estanteria{
+    width: 150px;
+    height: 50px;
+   
     margin-top: 30px;
   
    
@@ -68,8 +69,8 @@ header ul a{
 
 #container .formularioEmpeno form .producto{
    float: right;
-   margin-top:-94px;
-   padding: 34px;
+   margin-top:-102px;
+   padding: 40px;
    
 }
 
@@ -106,8 +107,24 @@ header ul a{
  #container .formularioEmpeno form .fecha-final{
     width: 100px;
     height: 50px;
-    margin-top:15px;
+    margin-top:20px;
     margin-left: 270px;
+  
+ }
+
+ 
+ #container .formularioEmpeno form .ubicacion{
+    width: 70px;
+    height: 70px;
+    margin-top:-60px;
+    margin-left: 270px;
+  
+ }
+ #container .formularioEmpeno form .estanteria{
+     width: 200px;
+    height: 60px;
+    margin-top:40px;
+    margin-left:0px;
   
  }
 
@@ -135,19 +152,38 @@ header ul a{
  #container .formularioEmpeno form .buton{
     width: 200px;
     height: 100px;
-    margin-top: 100px;
+    margin-top: 40px;
+   
  }
-
+ 
+ #container .formularioEmpeno form #verificar{
+    width: 200px;
+    height: 40px;
+    margin-top: -30px;
+    background-color: rgb(97, 190, 245);
+     color:#fff;
+ }
+ #container .formularioEmpeno form #asignar{
+    width: 200px;
+    height: 40px;
+    float: right;
+    margin-right: 28px;
+    margin-top: -20px;
+    background-color: rgb(60, 181, 236);
+     color:#fff;
+ }
  #container .formularioEmpeno form #cancelar{
     
-     margin-top: 23px;
+     margin-top: 0px;
+     height: 40px;
      float: right;
-     margin-right: -294px;
-     margin-top: 1px;
+     margin-right: -270px;
+   
      background-color: red;
      color:#fff;
    
  }
+ 
  
  footer{
     height: 18px;
