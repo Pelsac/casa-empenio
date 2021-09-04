@@ -66,10 +66,13 @@ header ul a{
     margin-top: -10px;
 }
 .varra form #buscar{
-    width: 100px;
-    height: 36px;
-    margin-top:-54px;
-    margin-left: 230px;
+    margin-top: -32px;
+    float: right;
+    margin-right: -100px;
+    
+    background-color: rgb(18, 119, 235);
+    color:#fff;
+   
 }
 aside{
     width: 100%;
@@ -113,9 +116,9 @@ nav .pago{
 #tabla{
     padding-top: 100px;
     width: 50%;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
     margin-left: 300px;
-    margin-top: -60px;
+    margin-top: -80px;
 
     color: #212529;
   

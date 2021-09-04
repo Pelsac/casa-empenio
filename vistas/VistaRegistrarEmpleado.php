@@ -95,7 +95,7 @@
                  <input type="password" class="form-control"  id="password" name="password">
             </dv>
             <div class="buton">
-              <button  type="submit" name="registrarE" class="btn btn-primary form-control">Registrar</button>
+              <button  type="submit" name="registrarE" id="registrar" class="btn btn-primary form-control">Registrar</button>
               
               
               <button type="reset" class="btn form-control" id="cancelar">Cancelar</button>

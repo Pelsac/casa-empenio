@@ -7,7 +7,8 @@ $oCliente->registrarCliente(22123,'Juan','Sanchez',31323,'asas@gmail.com');
 
 $oEmpleado=new Empleado();
 */
-
+$oEmpleado=new Empleado();
+$oEmpleado->buscarClientePagar(123);
 #$oEstan->asignarOcupacion(1,2,2);
 #$oPagosE=new PagosEmpenio();
 #$oProduc=new Producto();
@@ -20,8 +21,8 @@ $oEmpleado=new Empleado();
 #$ej=$oEmpleado->buscarEmpleado(1010);
 #echo($ej);
 #$oUsuario->registrarUsuario('adrs','pass',1012);
-$oUsuario=new Usuario();
-$oUsuario->buscarUsername("admin");
+#$oUsuario=new Usuario();
+#$oUsuario->buscarUsername("admin");
 #$oEmpleado->registrarEmpleado(1013,'Juan','Sanchez',31323,'asas@gmail.com','lorica','Administrador');
 /*
 $oCliente->registrarCliente(123,'Juan','Sanchez',31323,'asas@gmail.com');

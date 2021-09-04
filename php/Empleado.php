@@ -64,10 +64,56 @@ class Empleado extends Conexion{
    
       }
    }
+
+   public function buscarClientePagar($id){
+   
+   try{
+      
+    
+       $matriz = array();
+       $sql ="SELECT cedula,nombreC,apellido,valor_empenio,valor_pagado,fecha FROM cliente INNER JOIN pago_empenio ON pago_empenio.cedula_cliente=cliente.cedula INNER JOIN producto ON producto.cedula_cliente=cliente.cedula where cedula=$id" ;
+        $resultado=$this->conexion->prepare($sql);
+        $resultado->execute();
+        $numero_registro=$resultado->rowCount();
+        if($numero_registro!=0){
+            
+            foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
+            echo json_encode($matriz);
+         
+                
+        }else{
+          echo json_encode('no');
+        }
+         
+    }catch(Exception $e){
+       die("Error" . $e->getMessage());
+       echo "linea del error".$e->getLine();
+       
+    }
+
 }
+
+function registrarPago($valor,$fecha,$id_cliente){
+try{
+   
+    $sql = "INSERT INTO pago_empenio VALUES ('', '$valor', '$fecha', '$id_cliente')";
+    $resultado=$this->conexion->prepare($sql);
+    $resultado->execute();
+    echo json_encode('si');
+      
+ }catch(Exception $e){
+    die("Error" . $e->getMessage());
+    echo "linea del error".$e->getLine();
+
+ }
+}
+}
+$oEmpleado=new Empleado();
+$idC=$_POST['cc-buscar'];
 if(isset($_POST['registrarE'])){
 $idE=$_POST['cedula'];
-$oEmpleado=new Empleado();
+
+
 $bus=$oEmpleado->buscarEmpleado($idE);
 
     $nombreE=$_POST['nombre'];
@@ -86,6 +132,14 @@ $bus=$oEmpleado->buscarEmpleado($idE);
         $oUsuario->registrarUsuario($user,$pass,$idE);
     }
     }
+}else if(isset($_POST['buscarC'])){
+  
+$oEmpleado-> buscarClientePagar($idC);
+}else if(isset($_POST['pagar'])){
+$valor=$_POST['valor'];
+$fecha=$_POST['fecha'];
+    $oEmpleado->registrarPago($valor,$fecha,$idC);
+
 }
 
 ?>
