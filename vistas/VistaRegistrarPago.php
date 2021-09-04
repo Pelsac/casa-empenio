@@ -96,6 +96,6 @@
     
 
     <footer><p>Casa de empeño &</p></footer>
-   <script src="../js/funcionesEmpleado.js"></script>
+   <script src="../js/Pago_empenio.js"></script>
     </body>
 </html>
