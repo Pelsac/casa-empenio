@@ -145,7 +145,11 @@ function obtenerUbicacion(){
  // con este metodo verifico si el cliente existe en la BD 
  function VerificarCliente(){
   var datosC = new FormData(formulario);
-  datosC.append("buscar",idC)
+  datosC.append("buscar",idC.value)
+  for (var p of datosC.entries()){
+     
+    console.log (p);
+    }
   var url='../php/Cliente.php';
   
   fetch(url,{
@@ -154,28 +158,28 @@ function obtenerUbicacion(){
   })
   .then( res => res.json())
   .then( data => {
-    if(data==='no'){
-      mensaje.innerHTML = `
-      <div class="alert alert-danger" role="alert">
-              EL CLIENTE NO EXISTE !!
-      </div>
-      `;
-        setTimeout(() => {
-        mensaje.style.display='none';
-     }, 1000);
-    }else{
-     
-      mensaje.innerHTML = `
+    if(data==='existe'){ 
+        mensaje.innerHTML = `
       <div class="alert alert-danger" role="alert">
              Puede seguir con el registro !!
       </div>
       `;
      
+      mensaje.style.display='block';
       setTimeout(() => {
         mensaje.style.display='none';
+     }, 2000);
+    }else{
+     
+     mensaje.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+              EL CLIENTE NO EXISTE !!
+      </div>
+      `;
+      mensaje.style.display='block';
+        setTimeout(() => {
+        mensaje.style.display='none';
      }, 1000);
-      
-  
     }
     
   });

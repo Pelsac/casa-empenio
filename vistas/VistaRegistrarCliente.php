@@ -35,9 +35,17 @@
    <nav></nav>
     <section id="container">
 
-      <div class="formulario">
-          <h2>Registre el Cliente</h2>
-         <form  id="formulario" method="post">
+      <div class="formularioCliente">
+      <div class="mensaje mt-5"></div>
+         <div class="titulo">
+              <h2  >Registrar Cliente </h2>
+        </div>
+       <style>
+    div.titulo{
+	text-align: center;
+}
+    </style>
+         <form  id="formularioCliente" method="post">
         
                  <label for="cedula">Id Cliente</label><br>
                  <input type="text" class="form-control" placeholder="id" id="cedula" name="cedula" required/>
@@ -53,21 +61,22 @@
 
                  <label for="correo">Correo</label>
                  <input type="email" class="form-control" placeholder="Email" id="email" name="email"/><br>
-               
+                 <span id="asterisco" style="display: none;">*</span><br>
 
                 <button type="submit" class="btn btn-primary form-control" id="registrar" name="registrar">Registrar</button>
          
            
                 <button type="reset" class="btn form-control" id="cancelar">Cancelar</button>
+               
         
          </form>
-         <div class="mensaje mt-5"></div>
+        
       </div>
     </section>
     
 
     <footer><p>Casa de empeño &</p></footer>
-<script src="../js/funcionesCliente.js"></script>
+<script src="../js/Cliente.js"></script>
     
 </body>
 </html>

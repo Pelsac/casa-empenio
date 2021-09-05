@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2021 a las 17:54:33
+-- Tiempo de generación: 05-09-2021 a las 13:33:27
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -36,6 +36,8 @@ CREATE TABLE `cliente` (
   `correo` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +68,8 @@ CREATE TABLE `empleado` (
   `domicilio` varchar(150) NOT NULL,
   `rol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 -- --------------------------------------------------------
 
@@ -101,8 +105,9 @@ INSERT INTO `estanteria` (`id`, `nombre`, `capacidad_filas`, `capacidad_columnas
 CREATE TABLE `pago_empenio` (
   `id` int(11) NOT NULL,
   `valor_pagado` decimal(10,0) NOT NULL,
-  `fecha` datetime DEFAULT NULL,
-  `cedula_cliente` int(11) NOT NULL
+  `fecha` datetime NOT NULL,
+  `cedula_cliente` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -127,7 +132,7 @@ CREATE TABLE `producto` (
   `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+
 
 --
 -- Estructura de tabla para la tabla `usuario`
@@ -140,9 +145,8 @@ CREATE TABLE `usuario` (
   `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Índices para tablas volcadas
---
+
+
 
 --
 -- Indices de la tabla `cliente`
@@ -173,7 +177,8 @@ ALTER TABLE `estanteria`
 --
 ALTER TABLE `pago_empenio`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cedula_cliente` (`cedula_cliente`);
+  ADD KEY `cedula_cliente` (`cedula_cliente`),
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `producto`
@@ -205,7 +210,7 @@ ALTER TABLE `pago_empenio`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
@@ -215,7 +220,8 @@ ALTER TABLE `producto`
 -- Filtros para la tabla `pago_empenio`
 --
 ALTER TABLE `pago_empenio`
-  ADD CONSTRAINT `pago_empenio_ibfk_1` FOREIGN KEY (`cedula_cliente`) REFERENCES `cliente` (`cedula`);
+  ADD CONSTRAINT `pago_empenio_ibfk_1` FOREIGN KEY (`cedula_cliente`) REFERENCES `cliente` (`cedula`),
+  ADD CONSTRAINT `pago_empenio_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
 
 --
 -- Filtros para la tabla `producto`

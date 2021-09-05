@@ -16,6 +16,39 @@ class Producto extends Conexion{
      $this->conexion=$this->conexion->conect();
     }
 
+    
+
+    public function consultarProductos($id){
+      try{
+      
+    
+         $matriz = array();
+         $sql ="SELECT * FROM producto
+         WHERE producto.cedula_cliente='$id'  " ;
+          $resultado=$this->conexion->prepare($sql);
+          $resultado->execute();
+          $numero_registro=$resultado->rowCount();
+         
+          if($numero_registro!=0){
+           
+            foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
+          
+          return $matriz;
+        
+   
+        }else{
+         
+          return -1;
+        }
+           
+      }catch(Exception $e){
+         die("Error" . $e->getMessage());
+         echo "linea del error".$e->getLine();
+         
+      }
+      
+     
+    }
   
    public function registrarProducto(string $nombre,int $valorE, string $descripcion,string $fechaI,string $fechaF,int $ubicacionF,int $ubicacionC,int $cedulaC,int $idEstanteria,int $cedulaE){
 
@@ -29,14 +62,12 @@ class Producto extends Conexion{
         $this->UbicacionF=$ubicacionF;
         $this->UbicacionC=$ubicacionC;
         
-      $sql = "INSERT INTO `producto` VALUES ('','$this->Nombre','$this->ValorE','0','Empeñado','$this->Descripcion','$this->FechaI','$this->FechaF','$this->UbicacionF','$this->UbicacionC','$cedulaC','$idEstanteria','$cedulaE')";
+      $sql = "INSERT INTO `producto` VALUES ('','$this->Nombre','$this->ValorE','0','Empeniado','$this->Descripcion','$this->FechaI','$this->FechaF','$this->UbicacionF','$this->UbicacionC','$cedulaC','$idEstanteria','$cedulaE')";
       $resultado=$this->conexion->prepare($sql);
        
       $resultado->execute();
 
-     
-      $oEstanteria=new Estanteria();
-      $oEstanteria->asignarOcupacion($idEstanteria,$this->UbicacionF,$this->UbicacionC);
+    return 1;
         
       } catch(Exception $e){
          die("Error" . $e->getMessage());
@@ -48,8 +79,9 @@ class Producto extends Conexion{
 
     
 }
-$oProducto=new Producto();
 
+$oProducto=new Producto();
+if(isset($_POST['Insertar'])){
 $nombreP=$_POST['producto'];
 $cedulaC=$_POST['cedula'];
 $valorEm=$_POST['precio'];
@@ -61,9 +93,13 @@ $id_Estant=$_POST['estanteria'];
 $ubicaF=$_POST['ubicacionF'];
 $ubicaC=$_POST['ubicacionC'];
 
-    $oProducto->registrarProducto($nombreP,$valorEm,$descrip,$fechaI,$fechaF,$ubicaF,$ubicaC,$cedulaC,$id_Estant,$cedulaE);
-
-
+    $insert=$oProducto->registrarProducto($nombreP,$valorEm,$descrip,$fechaI,$fechaF,$ubicaF,$ubicaC,$cedulaC,$id_Estant,$cedulaE);
+if($insert==1){
+   $oEStan=new Estanteria();
+   $oEStan->asignarOcupacion($id_Estant,$ubicaF,$ubicaC);
+   
+}
+}
 
 ?>
  

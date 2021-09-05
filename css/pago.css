@@ -16,9 +16,11 @@ header{
 }
 
 .varra .error{
-  
-     margin-left: 50px;
+    margin-top: 10px;
+    width: 200px;
+    margin-left: 150px;
 }
+
 header #titulo{
     float: left;
     color: floralwhite;
@@ -118,6 +120,17 @@ nav .pago{
     width: 50%;
     margin-bottom: 1em;
     margin-left: 300px;
+    margin-top: -80px;
+
+    color: #212529;
+  
+
+}
+#tablaMP{
+    padding-top: 100px;
+    width: 70%;
+    margin-bottom: 1em;
+    margin-left: 150px;
     margin-top: -80px;
 
     color: #212529;

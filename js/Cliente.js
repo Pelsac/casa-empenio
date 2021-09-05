@@ -1,4 +1,4 @@
-const formulario = document.getElementById('formulario');
+const formulario = document.getElementById('formularioCliente');
 const idc = document.querySelector('#cedula');
 const nombre = document.querySelector('#nombre');
 const apellido = document.getElementById('apellido');
@@ -7,7 +7,6 @@ const email = document.getElementById('email');
 const mensaje = document.querySelector('.mensaje');
 const boton = document.getElementById('registrar');
 const  bntCancelar = document.getElementById('cancelar');
-
 
 
 
@@ -35,11 +34,13 @@ let reg=true;
             formulario.reset()
            
             mensaje.innerHTML=`<div class="alert alert-danger" >Registro Exitoso</div>`;  
+            mensaje.style.display='block';
             console.log('Datos Insertados');
                       
           }else{
             formulario.reset()
             mensaje.innerHTML=`<div class="alert alert-danger" >El cliente existe</div>`;  
+            mensaje.style.display='block';
             console.log('Usuario ya existe');
           }
           
@@ -52,6 +53,7 @@ let reg=true;
 function  validarFormulario(){
     if(idc.value==='' || nombre.value==='' || apellido.value==='' || telefono.value==='' || email.value===''){
         mensaje.innerHTML=`<div class="alert alert-danger" >LLene todo los campos</div>`; 
+        mensaje.style.display='block';
       console.log("Formulario vacio")
     }else{
        registrarCliente();
@@ -65,8 +67,7 @@ function  validarFormulario(){
 boton.addEventListener('click', (e)=>{
     e.preventDefault();
     validarFormulario();
-    
-    mensaje.style.display='block';
+
      setTimeout(() => {
          mensaje.style.display='none';
      },2000);

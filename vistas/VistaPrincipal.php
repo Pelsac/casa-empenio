@@ -120,7 +120,7 @@ require_once("../php/autoload.php");
     </aside>
 
     <footer><p>Casa de empeño &</p></footer>
-    <script src="../js/funcionesProducto.js">
+    <script src="../js/Producto.js">
    
 </script>
   

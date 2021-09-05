@@ -32,62 +32,39 @@
     </nav>
     </header>
     
-   <nav class="varra">
-  
-         <form form method="post" class="row" id="formulario-buscar">
-
-                 <label for="cc">Cedula</label> 
-                 <input type="text" class="form-control" placeholder="cedula" id="ccbuscar" name="ccbuscar">
-              
-                <button class="btn btn-primary " id="buscar" name="buscar">Buscar</button>
-               
-         </form>
-         <div id="ErrorM1" class="error"></div>
-         
-         <div id="deuda" class="pago">
-             
-             </div>
-
-             <div id="Valor-empeno" class="pago">
-               
-             </div>
-
-   </nav>
+   
    <aside>
-   <div class="form_RegistrarPago">
-          <h2>Registrar Pago</h2>
-         <form method="post" id ="form_RegistrarPago"  class="form-inline formularioRegistro">
-        
-            
-                 <div class="valor">
-                    <label for="valor">Valor</label><br>   
-                    <input type="text" class="form-control" placeholder="valor" name="valor" id="valor">
-                 </div><br>
-                 
-                  <button class="btn btn-primary  form-control" id="registrarPago">Guardar</button>
-          
-                  <button  type="reset" class="btn form-control " id="cancelar">Cancelar</button>
-               
-         </form>
+   <div class="Mover_Productos">
 
-         <div id="ErrorM2"></div>
+          <h2>MOVER PRODUCTOS A VENTAS  </h2>
+         <form method="post" id ="form_RegistrarPago"  class="form-inline formularioRegistro">
+                                  
+         </form>
+    
       </div>
+      <style>
+    div.Mover_Productos{
+	text-align: center;
+}
+    </style>
     
    </aside>
     <section id="container">
-    <div id="tabla">
+    <div id="tablaMP">
     <table class="table  table-striped table-hover tabla" >
             <thead class="thead-dark">
              <tr style="color:#000000;">
                  
                 
-                 <th>NOMBRES</th>
-                 <th>APELLIDOS</th>
-                 <th>PRODUCTO</th>
-                 <th>VALOR</th>
-                 <th>FECHA</th>
+                 <th>ID</th>
+                 <th>NOMBRE</th>
+                 <th>VALOR DE EMPEÑO</th>
                  <th>ESTADO</th>
-                 <th>FECHA_VENCIMIENTO </th>
+                 <th>DESCRIPCION</th>
+                 <th>FECHA FINAL</th>
+                 <th>CEDULA CLIENTE</th>
+                 <th>CLIENTE</th>
+                
              </tr>
             </thead>
             

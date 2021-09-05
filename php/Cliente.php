@@ -50,11 +50,11 @@ class Cliente extends Conexion{
            
            foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
           
-           echo json_encode("existe");
-        return $matriz;
+         return 1;
+       
  
        }else{
-         echo json_encode("no");
+        
          return -1;
        }
 
@@ -64,14 +64,41 @@ class Cliente extends Conexion{
 
    }
 }
+public function consultarEmpeniosActivos($id){
+   try{
+  
+    $matriz = array();
+     $sql="SELECT cedula_cliente FROM producto WHERE cedula_cliente = '$id'";
+     $resultado=$this->conexion->prepare($sql);
+     $resultado->execute();
+     $numero_registro=$resultado->rowCount();
+     if($numero_registro!=0){
+         
+         foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
+        
+       echo("1");
+     
+
+     }else{
+      
+       echo("-1");
+     }
+
+ }catch(Exception $e){
+    die("Error" . $e->getMessage());
+    echo "linea del error".$e->getLine();
+
+ }
+}
+
+
 }
 
 
 $oCliente =new Cliente();
-$idc=$_POST['cedula'];
+
 if(isset($_POST['registrar'])){
-
-
+   $idc=$_POST['cedula'];
    $nombrec=$_POST['nombre'];
    $apellidoc=$_POST['apellido'];
    $telefonoc=$_POST['celular'];
@@ -80,10 +107,18 @@ if(isset($_POST['registrar'])){
   $bus=$oCliente->buscarCliente($idc);
 if($bus==-1){
 $oCliente->registrarcliente($idc,$nombrec,$apellidoc,$telefonoc,$emailc);
+}else{
+echo json_encode("existe");
 }
 
 }elseif (isset($_POST['buscar'])) {
-   $oCliente->buscarCliente($idc);
+   $idc=$_POST['cedula'];
+   $ob=$oCliente->buscarCliente($idc);
+   if($ob==-1){
+      echo json_encode("No");
+   }else{
+      echo json_encode("existe");
+   }
 }
 
 

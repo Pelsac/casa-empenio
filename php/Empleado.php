@@ -39,19 +39,42 @@ class Empleado extends Conexion{
         }
              
        }
+
+       public function traerPagosCliente($id){
+       try { 
+           if(consultarNumeroPagos()==1){ 
+          
+        $sql = "SELECT nombreC,apellido,fecha,valor_pagado,valor_empenio* FROM cliente INNER JOIN producto on producto.cedula_cliente=cliente.cedula
+        INNER JOIN pago_empenio on cliente.cedula=pago_empenio.cedula_cliente where cliente.cedula=$id";
+
+           }else{ 
+
+           }
+        $resultado=$this->conexion->prepare($sql);
+         $resultado->execute();
+         
+        } catch(Exception $e){
+           die("Error" . $e->getMessage());
+           echo "linea del error".$e->getLine();
+    
+        }
+             
+    }
+
+      
        public function buscarEmpleado($id){
 
         try{
         $this->Cedula=$id;
          $matriz = array();
-          $sql="SELECT * FROM `empleado` WHERE cedula = BINARY '$this->Cedula'";
+          $sql="SELECT * FROM `empleado` WHERE cedula =  '$this->Cedula'";
           $resultado=$this->conexion->prepare($sql);
           $resultado->execute();
           $numero_registro=$resultado->rowCount();
           if($numero_registro!=0){
 
-           echo json_encode("empleadoE");
-           return $numero_registro;                
+            return 1;
+                
           }else{
               
             return -1;
@@ -65,33 +88,7 @@ class Empleado extends Conexion{
       }
    }
 
-   public function buscarClientePagar($id){
-   
-   try{
-      
-    
-       $matriz = array();
-       $sql ="SELECT cedula,nombreC,apellido,valor_empenio,valor_pagado,fecha FROM cliente INNER JOIN pago_empenio ON pago_empenio.cedula_cliente=cliente.cedula INNER JOIN producto ON producto.cedula_cliente=cliente.cedula where cedula=$id" ;
-        $resultado=$this->conexion->prepare($sql);
-        $resultado->execute();
-        $numero_registro=$resultado->rowCount();
-        if($numero_registro!=0){
-            
-            foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
-            echo json_encode($matriz);
-         
-                
-        }else{
-          echo json_encode('no');
-        }
-         
-    }catch(Exception $e){
-       die("Error" . $e->getMessage());
-       echo "linea del error".$e->getLine();
-       
-    }
-
-}
+ 
 
 function registrarPago($valor,$fecha,$id_cliente){
 try{
@@ -99,7 +96,7 @@ try{
     $sql = "INSERT INTO pago_empenio VALUES ('', '$valor', '$fecha', '$id_cliente')";
     $resultado=$this->conexion->prepare($sql);
     $resultado->execute();
-    echo json_encode('si');
+    echo json_encode('Si');
       
  }catch(Exception $e){
     die("Error" . $e->getMessage());
@@ -109,12 +106,15 @@ try{
 }
 }
 $oEmpleado=new Empleado();
-$idC=$_POST['cc-buscar'];
+$oPagos=new PagosEmpenio();
+$oProducto=new Producto();
+$oCliente=new Cliente();
+
 if(isset($_POST['registrarE'])){
 $idE=$_POST['cedula'];
 
 
-$bus=$oEmpleado->buscarEmpleado($idE);
+$busE=$oEmpleado->buscarEmpleado($idE);
 
     $nombreE=$_POST['nombre'];
     $apellidoE=$_POST['apellido'];
@@ -123,7 +123,7 @@ $bus=$oEmpleado->buscarEmpleado($idE);
     $domE=$_POST['domicilio'];
     $rolE=$_POST['rol'];
 
-    if($bus==-1){
+    if($busE==-1){
     $insert=$oEmpleado->registrarEmpleado($idE,$nombreE,$apellidoE,$celularE,$emailE,$domE,$rolE);
     if($insert==1){
         $user=$_POST['username'];
@@ -131,15 +131,36 @@ $bus=$oEmpleado->buscarEmpleado($idE);
         $oUsuario=new Usuario();
         $oUsuario->registrarUsuario($user,$pass,$idE);
     }
+    }else{
+       echo json_encode("Existe");
     }
 }else if(isset($_POST['buscarC'])){
   
-$oEmpleado-> buscarClientePagar($idC);
+  
+
+    $idC=$_POST['ccbuscar'];
+   
+    $busC=$oCliente->buscarCliente($idC);
+
+    if($busC==-1){
+    echo json_encode("No");
+    }else{
+        $cons=$oProducto->consultarProductos($idC);
+      if($cons!=-1  ){
+         $pagos=$oPagos->getPagosRealizados($idC);
+      if($pagos!=-1)
+      echo json_encode($pagos);
+       
+       }else{
+       }
+      }
+  
+
 }else if(isset($_POST['pagar'])){
-$valor=$_POST['valor'];
-$fecha=$_POST['fecha'];
-    $oEmpleado->registrarPago($valor,$fecha,$idC);
+   
+   $idC=$_POST['ccbuscar'];
 
 }
+ 
 
 ?>

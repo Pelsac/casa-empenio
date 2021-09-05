@@ -37,6 +37,6 @@
     </section>
     <footer><p>Casa de empeño &</p></footer>
       
-      <script src="./js/funcionesUsuario.js"></script>
+      <script src="./js/Usuario.js"></script>
 </body>
 </html>

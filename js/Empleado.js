@@ -44,18 +44,27 @@ let fechaA=anoActual+"-"+mesActual+"-"+dia;
    })
    .then( res => res.json())
    .then( data => {
-     if(data==='Si'){
+     if(data==='Existe'){
       mensaje.innerHTML = `
       <div class="alert alert-danger" role="alert">
-           Registro exitoso !!
+           ¡El nuemro de cedula ya se encuentra registrado! !!
       </div>
       `;
-     formulario.reset();
-       console.log('Datos Insertados');
-     }else{
+      mensaje.style.display='block';
+  
+     }else if(data==='Si'){
+      formulario.reset();
       mensaje.innerHTML = `
       <div class="alert alert-danger" role="alert">
-            El empleado ya se encuentra registrado !!
+            Registro exitoso !!
+      </div>
+      `;
+      mensaje.style.display='block';
+    }else{
+      formulario.reset();
+      mensaje.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+           ¡Username no disponible!
       </div>
       `;
       mensaje.style.display='block';
@@ -133,7 +142,7 @@ function VerificarUsuario(){
    }else{
     mensaje.innerHTML = `
     <div class="alert alert-danger" role="alert">
-              El username ya existe!
+              ¡El username ya existe!
     </div>
     `;
     

@@ -42,7 +42,7 @@ class Usuario extends Conexion{
         $this->Password=$pass;
        
         $matriz = array();
-        $sql="SELECT * FROM `usuario` WHERE username ='$this->Username' AND password = '$this->Password'";
+        $sql="SELECT * FROM usuario INNER JOIN empleado ON usuario.cedula_empleado=empleado.cedula WHERE username ='$this->Username' AND password = '$this->Password'";
         $resultado=$this->conexion->prepare($sql);
         $resultado->execute();
         $numero_registro=$resultado->rowCount();

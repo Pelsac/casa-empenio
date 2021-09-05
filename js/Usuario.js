@@ -25,13 +25,18 @@ function iniciarSesion(){
         .then( data => {
         // en esta parte verificamos si los datos devueltos por el .json son correctos
           if(data==='No'){
+            formulario.reset();
              mensaje.innerHTML=`<div class="alert alert-danger" role="alert">Password o Usuario Incorrectos</div>`
-             formulario.reset();
+             mensaje.style.display = 'block';
             }else{
-              location.href='vistas/VistaPrincipal.php';   
-              for(let i=0; i<data.length; i++){
-               localStorage.setItem('cedula_empleado',data[i].cedula_empleado); 
-              } 
+            
+             
+               localStorage.setItem('cedula_empleado',data[0].cedula_empleado); 
+               if(data[0].rol==='ADMINISTRADOR'){
+                location.href='vistas/VistaRegistrarEmpleado.php';   
+              } else{
+                location.href='vistas/VistaPrincipal.php';   
+              }
             
           }
           
@@ -45,7 +50,7 @@ function iniciarSesion(){
   
       if(usuario.value==='' || clave.value===''){
         mensaje.innerHTML=`<div class="alert alert-danger">LLene todo los campos</div>`;
-        
+        mensaje.style.display = 'block';
       }else{
         iniciarSesion();
       }   
@@ -58,7 +63,7 @@ function iniciarSesion(){
          validarFormulario();
 
          // en esta parte el mensaje se oculta 
-         mensaje.style.display = 'block';
+         
          setTimeout(() => {
              mensaje.style.display = 'none';
          }, 2000);
