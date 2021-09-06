@@ -45,7 +45,7 @@ require_once("autoload.php");
       
     
          $matriz = array();
-         $sql ="SELECT id,idP,nombreC,nombre,apellido,fecha,fecha_final,valor_empenio,valor_pagado,estado FROM cliente INNER JOIN producto ON producto.cedula_cliente=cliente.cedula INNER JOIN pago_empenio ON cliente.cedula=pago_empenio.cedula_cliente WHERE producto.cedula_cliente=$id AND producto.estado='Empeniado' " ;
+         $sql ="SELECT id,idPago,nombreC,nombre,apellido,fecha,fecha_final,valor_empenio,valor_pagado,estado FROM cliente INNER JOIN producto ON producto.cedula_cliente=cliente.cedula INNER JOIN pago_empenio ON cliente.cedula=pago_empenio.cedula_cliente WHERE producto.cedula_cliente=$id AND producto.estado='Empeniado'  ORDER BY pago_empenio.fecha DESC " ;
           $resultado=$this->conexion->prepare($sql);
           $resultado->execute();
           $numero_registro=$resultado->rowCount();
@@ -72,18 +72,16 @@ require_once("autoload.php");
     }
     
 
-   public function registrarPago(int $valor, string $fecha ){
-
-
+   public function registrarPago(int $valor, string $fecha , int $idC,int $idP){
 
     try { 
         $this->Valor=$valor;
         $this->Fecha=$fecha;
-       $sql = "INSERT INTO `pago_empenio` VALUES ('','$this->Valor','$this->Fecha',123,1010)";
+       $sql = "INSERT INTO `pago_empenio` VALUES ('','$this->Valor','$this->Fecha',$idC,$idP)";
        $resultado=$this->conexion->prepare($sql);
         
        $resultado->execute();
-       echo("Si");
+       echo json_encode("si");
       
        } catch(Exception $e){
           die("Error" . $e->getMessage());
@@ -95,6 +93,41 @@ require_once("autoload.php");
 
     
    }
+
+   $oPagos=new PagosEmpenio();
+ 
+  
+   if(isset($_POST['buscarC'])){
+    $oCliente=new Cliente();
+    $oProducto=new Producto();
+    $idC=$_POST['ccbuscar'];
+   
+    $busC=$oCliente->buscarCliente($idC);
+
+    if($busC==-1){
+    echo json_encode("No");
+    }else{
+        $cons=$oProducto->consultarProductos($idC);
+      if($cons!=-1  ){
+         $pagos=$oPagos->getPagosRealizados($idC);
+      if($pagos!=-1){
+      echo json_encode($pagos);
+       
+       }
+      }
+  
+
+}
+}else if(isset($_POST['pagar'])){
+
+  $valor=$_POST['valor'];
+  $fecha=$_POST['fecha'];
+  $idC=$_POST['ccbuscar'];
+  $idP=$_POST['idProducto'];
+  $oPagos->registrarPago($valor,$fecha,$idC,$idP);
+
+
+}
 
 
 

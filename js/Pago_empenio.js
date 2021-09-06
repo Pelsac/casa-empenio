@@ -17,8 +17,11 @@
 const anoActual = fecha.getFullYear();
 const dia = fecha.getDate();
 const mesActual = fecha.getMonth() + 1;
-let fechaA=anoActual+"-"+mesActual+"-"+dia;
-
+const horaE=fecha.getHours();
+const min=fecha.getMinutes();
+const seg=fecha.getSeconds();
+let fechaA=anoActual+"-"+mesActual+"-"+dia+" "+horaE+":"+min+":"+seg;
+console.log(fechaA);
 
 function validarIsertarPago(){
     if(valor.value===''  ){
@@ -45,11 +48,12 @@ function validarIsertarPago(){
     datosInsertar.append('ccbuscar',ccBuscar.value);
     datosInsertar.append('pagar','')
     datosInsertar.append('fecha',fechaA)
+    datosInsertar.append('idProducto',localStorage.getItem('idProducto'));
     for (var p of datosInsertar.entries()){
        
       console.log (p);
       }
-    var url='../php/Empleado.php';
+    var url='../php/PagosEmpenio.php';
     fetch(url,{
         method: 'POST',
         body: datosInsertar
@@ -72,7 +76,7 @@ function validarIsertarPago(){
     let datos = new FormData(formularioBuscar);
   
     datos.append('buscarC','');
-    var url='../php/Empleado.php';
+    var url='../php/PagosEmpenio.php';
     for (var p of datos.entries()){
      
       console.log (p);
@@ -93,14 +97,12 @@ function validarIsertarPago(){
             
             }else if(data[0].valor_pagado){
 
-             
-  
+              localStorage.setItem('idProducto',data[0].id); 
+ 
            var costoPagar,suma=0;
           let tbody=document.createElement('tbody');
           
-          
-          
-          
+          console.log(tbody.innerHTML);
           for(let i=0; i< data.length; i++){
             if(data[i].estado==="Empeniado" || data[i].estado==="Venta" ){
             tbody.innerHTML +=`<tr>
@@ -139,9 +141,10 @@ function validarIsertarPago(){
           }
          
        
+        
           
+         formularioRegistro.
           tabla.appendChild(tbody);
-         
          
          
             }
@@ -167,7 +170,7 @@ function validarIsertarPago(){
   // creamos el evento click 
   botonBuscar.addEventListener('click', (e)=>{
   
-    console.log(formularioRegistro.value);
+    
     e.preventDefault();
     
         validar();

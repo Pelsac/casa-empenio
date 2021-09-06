@@ -12,4 +12,5 @@ if($bus!=-1){
     echo("No esta");
     }
 
+#$oPagos->registrarPago(50000,'',2345,11);
 ?>

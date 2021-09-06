@@ -106,9 +106,7 @@ try{
 }
 }
 $oEmpleado=new Empleado();
-$oPagos=new PagosEmpenio();
-$oProducto=new Producto();
-$oCliente=new Cliente();
+
 
 if(isset($_POST['registrarE'])){
 $idE=$_POST['cedula'];
@@ -134,32 +132,6 @@ $busE=$oEmpleado->buscarEmpleado($idE);
     }else{
        echo json_encode("Existe");
     }
-}else if(isset($_POST['buscarC'])){
-  
-  
-
-    $idC=$_POST['ccbuscar'];
-   
-    $busC=$oCliente->buscarCliente($idC);
-
-    if($busC==-1){
-    echo json_encode("No");
-    }else{
-        $cons=$oProducto->consultarProductos($idC);
-      if($cons!=-1  ){
-         $pagos=$oPagos->getPagosRealizados($idC);
-      if($pagos!=-1)
-      echo json_encode($pagos);
-       
-       }else{
-       }
-      }
-  
-
-}else if(isset($_POST['pagar'])){
-   
-   $idC=$_POST['ccbuscar'];
-
 }
  
 
