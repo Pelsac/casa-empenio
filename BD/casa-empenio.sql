@@ -36,18 +36,7 @@ CREATE TABLE `cliente` (
   `correo` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `cliente`
---
 
-INSERT INTO `cliente` (`cedula`, `nombreC`, `apellido`, `celular`, `correo`) VALUES
-(2345, 'Nevel', 'Sanchez', 3136649113, 'nevel@gmail.com'),
-(6789, 'Andrez', 'Ruiz', 3123443, 'andres@gmail.com'),
-(108965, 'Javier', 'Mesa', 313456, 'havier@gmail.com'),
-(446890, 'Ana Iris', 'Calle Ortega', 3137480415, 'ana@gmail.com'),
-(34567890, 'Alis', 'Doria', 41345656546, 'alis@gmail.com');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `compra`
@@ -78,7 +67,17 @@ CREATE TABLE `empleado` (
   `rol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `empleado`
+--
 
+INSERT INTO `empleado` (`cedula`, `nombre`, `apellido`, `celular`, `correo`, `domicilio`, `rol`) VALUES
+(13065, 'Pedro', 'Sanchez', 3132678034, 'pedro@gmail.com', 'Lorica', 'ADMINISTRADOR'),
+(78965, 'Jaiver', 'Almentero', 3124499537, 'jaiver@gmail.com', 'Lorica', 'VENDEDOR');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estanteria`
 --
 
@@ -96,10 +95,10 @@ CREATE TABLE `estanteria` (
 --
 
 INSERT INTO `estanteria` (`id`, `nombre`, `capacidad_filas`, `capacidad_columnas`, `filas_ocupadas`, `columnas_ocupadas`) VALUES
-(1, 'Tecnologia ', 200, 200, 2, 1),
+(1, 'Tecnologia ', 200, 200, 0,0),
 (2, 'Joyas', 200, 200, 0, 0),
 (3, 'Ventas', 100, 100, 0, 0),
-(4, 'Electrodoméstico', 200, 200, 1, 1);
+(4, 'Electrodoméstico', 200, 200, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -115,10 +114,6 @@ CREATE TABLE `pago_empenio` (
   `id_producto` int(11) NOT NULL,
   `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `pago_empenio`
---
 
 --
 -- Estructura de tabla para la tabla `producto`
@@ -141,10 +136,6 @@ CREATE TABLE `producto` (
   `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `producto`
---
-
 
 --
 -- Estructura de tabla para la tabla `usuario`
@@ -161,6 +152,13 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
+INSERT INTO `usuario` (`username`, `password`, `ultima_sesion`, `cedula_empleado`) VALUES
+('Admin', 'Admin61', '2021-09-08 17:56:33', 13065),
+('Jaiver', 'Jaiver01', '0000-00-00 00:00:00', 78965);
+
+--
+-- Índices para tablas volcadas
+--
 
 --
 -- Indices de la tabla `cliente`
