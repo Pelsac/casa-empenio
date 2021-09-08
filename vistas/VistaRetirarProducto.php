@@ -26,8 +26,7 @@
       
         </div>  
         <img src="../imagenes/img2.jpg">
-    <nav>
-    <nav>
+        <nav>
      <ul>
              <a href="VistaRegistrarCliente.php"><samp class="glyphicon glyphicon-plus" ></samp>  Clientes</a> 
              <a href="VistaPrincipal.php"><samp class="glyphicon  glyphicon-plus" ></samp>  Productos </a>
@@ -37,7 +36,6 @@
              <a href="./cerrar_sesion.php"><samp class="glyphicon glyphicon-log-in"></samp>  Salir</a>
       
        </ul>
-    </nav>
     </nav>
     </header>
     
@@ -64,16 +62,13 @@
    </nav>
    <aside>
    <div class="form_RegistrarPago">
-          <h2>Registrar Pago</h2>
-         <form method="post" id ="form_RegistrarPago"  class="form-inline formularioRegistro">
+          <h2>Retirar producto</h2>
+         <form method="post" id ="retirarProducto"  class="form-inline formularioRegistro">
         
             
-                 <div class="valor">
-                    <label for="valor">Valor</label><br>   
-                    <input type="text" class="form-control" placeholder="valor" name="valor" id="valor">
-                 </div><br>
+             <br>
                  
-                  <button class="btn btn-primary  form-control" id="registrarPago">Guardar</button>
+                  <button class="btn btn-primary  form-control" id="retirarProducto">Retirar</button>
           
                   <button  type="reset" class="btn form-control " id="cancelar">Cancelar</button>
                
@@ -93,11 +88,9 @@
                  <th>NOMBRES</th>
                  <th>APELLIDOS</th>
                  <th>PRODUCTO</th>
-                 <th>VALOR</th>
-                 <th>FECHA</th>
                  <th>ESTADO</th>
-                 <th>FECHA_VENCIMIENTO </th>
                  <th>DESCRIPCION</th>
+                
              </tr>
             </thead>
             
@@ -108,7 +101,6 @@
     
 
     <footer><p>Casa de empeño &</p></footer>
-   <script src="../js/Pago_empenio.js"></script>
-   
-    </body>
+   <script src="../js/RetirarProducto.js"></script>
+     </body>
 </html>

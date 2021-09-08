@@ -10,7 +10,8 @@ const formulario=document.getElementById('formularioEmpeno');
   const mensaje=document.getElementById('mensaje');
   const btnVerificar=document.getElementById('verificar');
   const btnAsignar=document.getElementById('asignar');
-  
+  const inv=document.getElementById('inventario');
+  inv.style.display = 'none';
   
  console.log(idA)
 
@@ -25,12 +26,15 @@ const formulario=document.getElementById('formularioEmpeno');
  var dia = fecha.getDate();
  var mesActual = fecha.getMonth() + 1;
  var fechaInicial= anoActual+'-'+mesActual+'-'+dia;
+ console.log(dia);
 //console.log(fechafinal.value); Falta verificar fecha
   //creamos el meto para mandar los datos a la BD 
+ 
 
   function insertarDatosEmpeno(){
+    
+   
 
-if(fechafinal.value)
     var datos = new FormData(formulario);
     datos.append('fecha_inicial',fechaInicial);
     datos.append('cedula_empleado',idA);
@@ -65,6 +69,11 @@ if(fechafinal.value)
 }
 // Metodo para verificar que todo los campos esten llenos 
 function verificarCampos(){
+  let añoS=parseInt(fechafinal.value.substr(0,4));
+    let mesS=parseInt(fechafinal.value.substr(5,7));
+    let diaS=parseInt(fechafinal.value.substr(8,10));
+    
+
   if(idC.value==''|| producto.value==''  || estanteria.value==''|| precio.value==''||
    descripcion.value==''|| ubicacion.value=='' ||fechafinal.value==''  ){
     mensaje.innerHTML = `
@@ -73,10 +82,19 @@ function verificarCampos(){
     </div>
     `;
     mensaje.style.display='block';
+  }else if((añoS<anoActual || mesS<mesActual) || diaS<=dia ){
+    mensaje.style.display='block';
+    mensaje.innerHTML = `
+    <div class="alert alert-danger" role="alert">
+              La fecha escojida debe ser superior a la actual 
+    </div>
+    `;
+   
   }else{
   insertarDatosEmpeno();
   }
-}
+  }
+
 
 
  // cevento submit 
@@ -97,6 +115,7 @@ function verificarCampos(){
 function obtenerUbicacion(){
   let bsU=true;
  var datosEs = new FormData(formulario);
+ 
  datosEs.append('buscarEs',bsU);
  for (var p of datosEs.entries()){
      
@@ -109,15 +128,33 @@ function obtenerUbicacion(){
  })
  .then( res => res.json())
  .then( data => {
+   
   let fila=parseInt(data[0].filas_ocupadas);
   let colum=parseInt(data[0].columnas_ocupadas);
+
+ 
   if(parseInt(data[0].capacidad_filas)>fila&& parseInt(data[0].capacidad_columnas)>colum)  {
+    if(fila===0 && colum===0){
   fila=fila+1;
   colum=colum+1;
 
- console.log(fila);
- console.log(fila+1);
-  ubicacion.value="("+fila+","+colum+")";
+    }else{
+  
+      
+console.log('fila',parseInt(data[0].ubicacion_fila));
+if(parseInt(data[0].ubicacion_fila)<100){
+fila=parseInt(data[0].ubicacion_fila)+1;
+
+       }else{
+
+ fila=fila+1;
+  colum=colum+1;
+      }
+    }
+
+   
+
+  ubicacion.value="("+colum+","+fila+")";
   
   localStorage.setItem('filaU',fila); 
   localStorage.setItem('columnaU',colum); 
@@ -211,13 +248,13 @@ function obtenerUbicacion(){
     e.preventDefault();
 
     // aca verifico que ese campo no este vacio 
-    if(estanteria.value==0){
+    if(estanteria.value==0 ){
      
         ubicacion.value="";
  
       mensaje.innerHTML = `
       <div class="alert alert-danger" role="alert">
-               ¡Seleccione una estanteria!
+               ¡Seleccione una estanteria !
       </div>
       `;
       mensaje.style.display='block';
@@ -227,7 +264,7 @@ function obtenerUbicacion(){
     
     }else{
     obtenerUbicacion();
- 
+  
 
     }
   

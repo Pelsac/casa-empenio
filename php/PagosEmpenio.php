@@ -8,6 +8,40 @@ require_once("autoload.php");
     $this->conexion=$this->conexion->conect();
    }
 
+
+   public function consultarPagosRealizadosEmpelado(){
+    try{
+    
+  
+       $matriz = array();
+       $sql ="SELECT * FROM pago_empenio 
+        " ;
+        $resultado=$this->conexion->prepare($sql);
+        $resultado->execute();
+        $numero_registro=$resultado->rowCount();
+       
+        if($numero_registro!=0){
+         
+          foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
+       
+        return $matriz;
+      
+ 
+      }else{
+       
+        return -1;
+      }
+         
+    }catch(Exception $e){
+       die("Error" . $e->getMessage());
+       echo "linea del error".$e->getLine();
+       
+    }
+    
+   
+  }
+
+
    public function consultarPagosRealizados($id){
       try{
       
@@ -45,7 +79,7 @@ require_once("autoload.php");
       
     
          $matriz = array();
-         $sql ="SELECT id,idPago,nombreC,nombre,apellido,fecha,fecha_final,valor_empenio,valor_pagado,estado FROM cliente INNER JOIN producto ON producto.cedula_cliente=cliente.cedula INNER JOIN pago_empenio ON cliente.cedula=pago_empenio.cedula_cliente WHERE producto.cedula_cliente=$id AND producto.estado='Empeniado'  ORDER BY pago_empenio.fecha DESC " ;
+         $sql ="SELECT id,idPago,id_producto,id_estanteria,nombreC,nombre,apellido,descripcion,fecha,fecha_final,valor_empenio,valor_pagado,estado FROM cliente INNER JOIN producto ON producto.cedula_cliente=cliente.cedula INNER JOIN pago_empenio ON cliente.cedula=pago_empenio.cedula_cliente WHERE (producto.cedula_cliente='$id' AND pago_empenio.id_producto=producto.id) AND (producto.estado='Empeniado' OR producto.estado='Venta' ) ORDER BY pago_empenio.fecha DESC " ;
           $resultado=$this->conexion->prepare($sql);
           $resultado->execute();
           $numero_registro=$resultado->rowCount();
@@ -72,12 +106,12 @@ require_once("autoload.php");
     }
     
 
-   public function registrarPago(int $valor, string $fecha , int $idC,int $idP){
+   public function registrarPago(int $valor, string $fecha , int $idC,int $idP,$idE){
 
     try { 
         $this->Valor=$valor;
         $this->Fecha=$fecha;
-       $sql = "INSERT INTO `pago_empenio` VALUES ('','$this->Valor','$this->Fecha',$idC,$idP)";
+       $sql = "INSERT INTO `pago_empenio` VALUES ('','$this->Valor','$this->Fecha',$idC,$idP,$idE)";
        $resultado=$this->conexion->prepare($sql);
         
        $resultado->execute();
@@ -107,13 +141,17 @@ require_once("autoload.php");
     if($busC==-1){
     echo json_encode("No");
     }else{
-        $cons=$oProducto->consultarProductos($idC);
+        $cons=$oProducto->consultarProductosEmpeniado($idC);
       if($cons!=-1  ){
-         $pagos=$oPagos->getPagosRealizados($idC);
+         $pagos=$oPagos->getPagosRealizados($idC,);
       if($pagos!=-1){
       echo json_encode($pagos);
        
+       }else{
+         echo json_encode($cons);
        }
+      }else{
+        echo json_encode('0');
       }
   
 
@@ -124,12 +162,12 @@ require_once("autoload.php");
   $fecha=$_POST['fecha'];
   $idC=$_POST['ccbuscar'];
   $idP=$_POST['idProducto'];
-  $oPagos->registrarPago($valor,$fecha,$idC,$idP);
+  $idEm=$_POST['ccEmpleado'];
+  
+  $oPagos->registrarPago($valor,$fecha,$idC,$idP,$idEm);
 
 
 }
-
-
 
 
 ?>

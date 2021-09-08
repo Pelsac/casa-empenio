@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-09-2021 a las 13:33:27
+-- Tiempo de generación: 09-09-2021 a las 01:28:36
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -36,7 +36,16 @@ CREATE TABLE `cliente` (
   `correo` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
 
+INSERT INTO `cliente` (`cedula`, `nombreC`, `apellido`, `celular`, `correo`) VALUES
+(2345, 'Nevel', 'Sanchez', 3136649113, 'nevel@gmail.com'),
+(6789, 'Andrez', 'Ruiz', 3123443, 'andres@gmail.com'),
+(108965, 'Javier', 'Mesa', 313456, 'havier@gmail.com'),
+(446890, 'Ana Iris', 'Calle Ortega', 3137480415, 'ana@gmail.com'),
+(34567890, 'Alis', 'Doria', 41345656546, 'alis@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -70,10 +79,6 @@ CREATE TABLE `empleado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `estanteria`
 --
 
@@ -91,10 +96,10 @@ CREATE TABLE `estanteria` (
 --
 
 INSERT INTO `estanteria` (`id`, `nombre`, `capacidad_filas`, `capacidad_columnas`, `filas_ocupadas`, `columnas_ocupadas`) VALUES
-(1, 'Tecnologia ', 200, 200, 0, 0),
+(1, 'Tecnologia ', 200, 200, 2, 1),
 (2, 'Joyas', 200, 200, 0, 0),
 (3, 'Ventas', 100, 100, 0, 0),
-(4, 'Electrodoméstico', 200, 200, 0, 0);
+(4, 'Electrodoméstico', 200, 200, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -103,14 +108,17 @@ INSERT INTO `estanteria` (`id`, `nombre`, `capacidad_filas`, `capacidad_columnas
 --
 
 CREATE TABLE `pago_empenio` (
-  `id` int(11) NOT NULL,
+  `idPago` int(11) NOT NULL,
   `valor_pagado` decimal(10,0) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` date DEFAULT NULL,
   `cedula_cliente` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL
+  `id_producto` int(11) NOT NULL,
+  `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+--
+-- Volcado de datos para la tabla `pago_empenio`
+--
 
 --
 -- Estructura de tabla para la tabla `producto`
@@ -122,9 +130,10 @@ CREATE TABLE `producto` (
   `valor_empenio` decimal(10,0) NOT NULL,
   `precio_venta` decimal(10,0) DEFAULT NULL,
   `estado` varchar(50) NOT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
   `fecha_inicial` date NOT NULL,
   `fecha_final` date NOT NULL,
+  `fecha_retiro` datetime DEFAULT NULL,
   `ubicacion_fila` int(11) NOT NULL,
   `ubicacion_columna` int(11) NOT NULL,
   `cedula_cliente` int(11) NOT NULL,
@@ -132,6 +141,9 @@ CREATE TABLE `producto` (
   `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
 
 
 --
@@ -145,7 +157,9 @@ CREATE TABLE `usuario` (
   `cedula_empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+--
+-- Volcado de datos para la tabla `usuario`
+--
 
 
 --
@@ -176,9 +190,10 @@ ALTER TABLE `estanteria`
 -- Indices de la tabla `pago_empenio`
 --
 ALTER TABLE `pago_empenio`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idPago`),
   ADD KEY `cedula_cliente` (`cedula_cliente`),
-  ADD KEY `id_producto` (`id_producto`);
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `cedula_empleado` (`cedula_empleado`);
 
 --
 -- Indices de la tabla `producto`
@@ -204,13 +219,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `pago_empenio`
 --
 ALTER TABLE `pago_empenio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idPago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
@@ -221,7 +236,8 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `pago_empenio`
   ADD CONSTRAINT `pago_empenio_ibfk_1` FOREIGN KEY (`cedula_cliente`) REFERENCES `cliente` (`cedula`),
-  ADD CONSTRAINT `pago_empenio_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
+  ADD CONSTRAINT `pago_empenio_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
+  ADD CONSTRAINT `pago_empenio_ibfk_3` FOREIGN KEY (`cedula_empleado`) REFERENCES `empleado` (`cedula`);
 
 --
 -- Filtros para la tabla `producto`

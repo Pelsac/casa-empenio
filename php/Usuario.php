@@ -49,10 +49,11 @@ class Usuario extends Conexion{
 
         if($numero_registro!=0){
             session_start();
-            $_SESSION["usuarios"]='$this->Password';
+            $_SESSION["usuarios"]='$this->Username';
             foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
+            
             echo json_encode($matriz);
-                              
+                 return 1;             
         
         }else{
             echo json_encode('No');
@@ -66,6 +67,22 @@ class Usuario extends Conexion{
        }
     }
 
+
+public function lastSesion($fecha,$user){
+try{
+       
+    $matriz = array();
+     $sql="UPDATE `usuario` SET `ultima_sesion`='$fecha' WHERE usuario.username='$user'";
+     $resultado=$this->conexion->prepare($sql);
+     $resultado->execute();
+   
+
+ }catch(Exception $e){
+    die("Error" . $e->getMessage());
+    echo "linea del error".$e->getLine();
+
+ }
+}
     public function buscarUsername($id){
         try{
        
@@ -93,13 +110,17 @@ class Usuario extends Conexion{
 }
 
 $oUsuario=new Usuario();
+
  
 if (isset($_POST['iniciarS'])) { 
     $usuario=$_POST['usuario'];
     $clave=$_POST['clave'];
-     
-    
-    $oUsuario->iniciarSesion($usuario,$clave);
+   
+    $insert=$oUsuario->iniciarSesion($usuario,$clave);
+    if($insert==1){
+        $fecha=$_POST['fechaUpdate'];
+        $oUsuario->lastSesion($fecha,$usuario);
+    }
     }elseif (isset($_POST['buscarU'])) {
         $uNma= $_POST['username'];
         $oUsuario->buscarUsername($uNma);

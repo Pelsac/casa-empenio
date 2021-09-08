@@ -9,7 +9,7 @@ if($bus!=-1){
     echo json_encode($bus);
     
     }else{
-    echo("No esta");
+    echo("No hay pagos");
     }
 
 #$oPagos->registrarPago(50000,'',2345,11);

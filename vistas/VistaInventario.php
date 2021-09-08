@@ -7,7 +7,7 @@
     <title>Empeño</title>
     <link rel="stylesheet" href="../css/pago.css">
         <!--  Bootstrap  -->
-    
+  
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">  
    
@@ -26,8 +26,7 @@
       
         </div>  
         <img src="../imagenes/img2.jpg">
-    <nav>
-    <nav>
+        <nav>
      <ul>
              <a href="VistaRegistrarCliente.php"><samp class="glyphicon glyphicon-plus" ></samp>  Clientes</a> 
              <a href="VistaPrincipal.php"><samp class="glyphicon  glyphicon-plus" ></samp>  Productos </a>
@@ -38,42 +37,38 @@
       
        </ul>
     </nav>
-    </nav>
     </header>
     
    <nav class="varra">
   
-         <form form method="post" class="row" id="formulario-buscar">
-
-                 <label for="cc">Cedula</label> 
-                 <input type="text" class="form-control" placeholder="cedula" id="ccbuscar" name="ccbuscar">
-              
-                <button class="btn btn-primary " id="buscar" name="buscar">Buscar</button>
-               
-         </form>
+        
          <div id="ErrorM1" class="error"></div>
-         
-         <div id="deuda" class="pago">
-             
-             </div>
+        
 
              <div id="Valor-empeno" class="pago">
                
              </div>
 
+          
+
    </nav>
    <aside>
    <div class="form_RegistrarPago">
-          <h2>Registrar Pago</h2>
-         <form method="post" id ="form_RegistrarPago"  class="form-inline formularioRegistro">
+          <h2>Generar inventario</h2>
+         <form method="post" class="form-inline formularioRegistro">
         
             
-                 <div class="valor">
-                    <label for="valor">Valor</label><br>   
-                    <input type="text" class="form-control" placeholder="valor" name="valor" id="valor">
+               <div class="">  
+                   <label for="fechaI">Fecha Inicio</label><br>
+                 <input type="date" class="form-control" placeholder="Fecha inicio" name="fechaI" id="fechaI">
+               </div>
+             
+                 <div class="">
+                    <label for="fechaF">Fecha Final</label><br>   
+                    <input type="date" class="form-control" placeholder="Fecha final" name="fechaF" id="fechaF">
                  </div><br>
                  
-                  <button class="btn btn-primary  form-control" id="registrarPago">Guardar</button>
+                  <button type="submit" class="btn btn-primary form-control " id="registra">calcular</button>
           
                   <button  type="reset" class="btn form-control " id="cancelar">Cancelar</button>
                
@@ -88,27 +83,26 @@
     <table class="table  table-striped table-hover tabla" >
             <thead class="thead-dark">
              <tr style="color:#000000;">
-                 
-                
-                 <th>NOMBRES</th>
-                 <th>APELLIDOS</th>
-                 <th>PRODUCTO</th>
-                 <th>VALOR</th>
+                 <th>ID EMPLEADO</th>
+                 <th>NOMBRE EMPLEADO</th>
+                 <th>ID CLIENTE</th>
+                 <th>NOMBRES CLIENTE</th>
+                 <th>APELLIDOS CLIENTE</th>
                  <th>FECHA</th>
-                 <th>ESTADO</th>
-                 <th>FECHA_VENCIMIENTO </th>
-                 <th>DESCRIPCION</th>
+                 <th>VALOR</th>
              </tr>
             </thead>
             
+               
              </table>
              </div>
       
+            
     </section>
     
 
     <footer><p>Casa de empeño &</p></footer>
-   <script src="../js/Pago_empenio.js"></script>
+   <script src="../js/Inventario.js"></script>
    
     </body>
 </html>

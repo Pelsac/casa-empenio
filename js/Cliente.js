@@ -51,8 +51,8 @@ let reg=true;
 // validar formulario 
 
 function  validarFormulario(){
-    if(idc.value==='' || nombre.value==='' || apellido.value==='' || telefono.value==='' || email.value===''){
-        mensaje.innerHTML=`<div class="alert alert-danger" >LLene todo los campos</div>`; 
+    if(idc.value==='' || nombre.value==='' || apellido.value===''  ){
+        mensaje.innerHTML=`<div class="alert alert-danger" >LLene los datos de identificacion</div>`; 
         mensaje.style.display='block';
       console.log("Formulario vacio")
     }else{

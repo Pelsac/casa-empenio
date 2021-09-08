@@ -13,6 +13,13 @@
    
 </head>
 <body>
+
+<?php
+    session_start();
+    if(!isset($_SESSION["usuarios"])){
+     header("location:../index.php");
+     }
+?>
     <header>
 
     <div id="titulo">
@@ -20,13 +27,14 @@
       
         </div>  
         <img src="../imagenes/img2.jpg">
-    <nav>
+        <nav>
      <ul>
-             <a href="VistaPrincipal.php">Empeño</a> 
-             <a href="#"><samp class="glyphicon  glyphicon-plus" ></samp> Registro Producto </a>
-             <a href="VistaRegistrarPago.php"> <samp class="glyphicon  glyphicon-plus" ></samp> Registrar Pago</a>
-             <a href="#"><samp class="glyphicon glyphicon-list-alt" > Editar Datos </samp></a>
-             <a href="#"><samp class="glyphicon glyphicon-log-in" ></samp>  Salir</a>
+             <a href="VistaRegistrarCliente.php"><samp class="glyphicon glyphicon-plus" ></samp>  Clientes</a> 
+             <a href="VistaPrincipal.php"><samp class="glyphicon  glyphicon-plus" ></samp>  Productos </a>
+             <a href="VistaRegistrarPago.php"> <samp class="glyphicon  glyphicon-plus" ></samp> Pagos</a>
+             <a href="VistaRegistrarEmpleado.php"> <samp class="glyphicon  glyphicon-plus" ></samp> Empleado</a>
+             <a href="VistaInventario.php"> <samp class="glyphicon  glyphicon-plus" id='inventario'></samp> Inventario</a>
+             <a href="./cerrar_sesion.php"><samp class="glyphicon glyphicon-log-in"></samp>  Salir</a>
       
        </ul>
     </nav>

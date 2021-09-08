@@ -16,15 +16,31 @@ class Producto extends Conexion{
      $this->conexion=$this->conexion->conect();
     }
 
+    public function retirarProducto($id,$cedula,$estado,$fecha){
+      try{
+       
+        $matriz = array();
+         $sql="UPDATE `producto` SET `estado`='$estado', fecha_retiro='$fecha' WHERE producto.cedula_cliente='$cedula' and producto.id='$id'";
+         $resultado=$this->conexion->prepare($sql);
+         $resultado->execute();
+       
+   return 1;
+     }catch(Exception $e){
+        die("Error" . $e->getMessage());
+        echo "linea del error".$e->getLine();
+    
+     }
+  
+ }
     
 
-    public function consultarProductos($id){
+    public function consultarProductosEmpeniado($id){
       try{
       
     
          $matriz = array();
          $sql ="SELECT * FROM producto
-         WHERE producto.cedula_cliente='$id'  " ;
+         WHERE producto.cedula_cliente='$id' AND producto.estado='Empeniado' ORDER BY producto.fecha_inicial DESC" ;
           $resultado=$this->conexion->prepare($sql);
           $resultado->execute();
           $numero_registro=$resultado->rowCount();
@@ -62,7 +78,7 @@ class Producto extends Conexion{
         $this->UbicacionF=$ubicacionF;
         $this->UbicacionC=$ubicacionC;
         
-      $sql = "INSERT INTO `producto` VALUES ('','$this->Nombre','$this->ValorE','0','Empeniado','$this->Descripcion','$this->FechaI','$this->FechaF','$this->UbicacionF','$this->UbicacionC','$cedulaC','$idEstanteria','$cedulaE')";
+      $sql = "INSERT INTO `producto` VALUES ('','$this->Nombre','$this->ValorE','0','Empeniado','$this->Descripcion','$this->FechaI','$this->FechaF','','$this->UbicacionF','$this->UbicacionC','$cedulaC','$idEstanteria','$cedulaE')";
       $resultado=$this->conexion->prepare($sql);
        
       $resultado->execute();
@@ -81,6 +97,7 @@ class Producto extends Conexion{
 }
 
 $oProducto=new Producto();
+$oEStan=new Estanteria();
 if(isset($_POST['Insertar'])){
 $nombreP=$_POST['producto'];
 $cedulaC=$_POST['cedula'];
@@ -95,11 +112,23 @@ $ubicaC=$_POST['ubicacionC'];
 
     $insert=$oProducto->registrarProducto($nombreP,$valorEm,$descrip,$fechaI,$fechaF,$ubicaF,$ubicaC,$cedulaC,$id_Estant,$cedulaE);
 if($insert==1){
-   $oEStan=new Estanteria();
+
    $oEStan->asignarOcupacion($id_Estant,$ubicaF,$ubicaC);
    
 }
+}else if(isset($_POST['retirar'])){
+  $idP=$_POST['id_producto'];
+  $cc=$_POST['ccbuscar'];
+  $estado=$_POST['estado'];
+  $fechaRetiro=$_POST['fecha'];
+$update=$oProducto->retirarProducto($idP,$cc,$estado,$fechaRetiro);
+if($update==1){
+  $idEsta=$_POST['id_estanteria'];
+$oEStan->disminuirOcupacion($idEsta);
 }
+}
+
+  
 
 ?>
  

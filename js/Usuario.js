@@ -6,11 +6,23 @@ const mensaje=document.querySelector('.mensaje');
 
 //metodo para validar si los datos de ingreso son correctos o existen en la base de datos 
 
+let fecha = new Date();
+const anoActual = fecha.getFullYear();
+const dia = fecha.getDate();
+const mesActual = fecha.getMonth() + 1;
+const horaE=fecha.getHours();
+const min=fecha.getMinutes();
+const seg=fecha.getSeconds();
+let fechaA=anoActual+"-"+mesActual+"-"+dia+" "+horaE+":"+min+":"+seg;
+
+
+
 
 function iniciarSesion(){
  let iniciarS=true;
     let datos = new FormData(formulario);
    datos.append('iniciarS',iniciarS);
+   datos.append('fechaUpdate',fechaA)
    //Verificar datos de del formulario
    for (var p of datos.entries()){
      
@@ -32,8 +44,10 @@ function iniciarSesion(){
             
              
                localStorage.setItem('cedula_empleado',data[0].cedula_empleado); 
+               localStorage.setItem('nombre',data[0].nombre); 
+               localStorage.setItem('apellido',data[0].apellido); 
                if(data[0].rol==='ADMINISTRADOR'){
-                location.href='vistas/VistaRegistrarEmpleado.php';   
+                location.href='vistas/VistaPrincipal.php';  
               } else{
                 location.href='vistas/VistaPrincipal.php';   
               }
@@ -52,7 +66,7 @@ function iniciarSesion(){
         mensaje.innerHTML=`<div class="alert alert-danger">LLene todo los campos</div>`;
         mensaje.style.display = 'block';
       }else{
-        iniciarSesion();
+       iniciarSesion();
       }   
   }
   // creamos el evento submit 

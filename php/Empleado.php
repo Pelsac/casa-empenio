@@ -40,26 +40,31 @@ class Empleado extends Conexion{
              
        }
 
-       public function traerPagosCliente($id){
-       try { 
-           if(consultarNumeroPagos()==1){ 
+       
+       public function crearInventario($fechaI,$fechaF){    
+   try{
           
-        $sql = "SELECT nombreC,apellido,fecha,valor_pagado,valor_empenio* FROM cliente INNER JOIN producto on producto.cedula_cliente=cliente.cedula
-        INNER JOIN pago_empenio on cliente.cedula=pago_empenio.cedula_cliente where cliente.cedula=$id";
-
-           }else{ 
-
-           }
+       $matriz = array();
+       $sql = "SELECT * FROM pago_empenio INNER JOIN cliente on pago_empenio.cedula_cliente=cliente.cedula INNER JOIN empleado on empleado.cedula=pago_empenio.cedula_empleado WHERE (fecha BETWEEN '$fechaI' AND '$fechaF')  " ;
         $resultado=$this->conexion->prepare($sql);
-         $resultado->execute();
+        $resultado->execute();
+        $numero_registro=$resultado->rowCount();
+        if($numero_registro!=0){
+            
+            foreach ($this->conexion->query($sql, PDO::FETCH_ASSOC) as $item) $matriz[] = $item;
+            echo json_encode($matriz);
          
-        } catch(Exception $e){
-           die("Error" . $e->getMessage());
-           echo "linea del error".$e->getLine();
-    
+                 
+        }else{
+          echo json_encode('no');
         }
-             
+         
+    }catch(Exception $e){
+       die("Error" . $e->getMessage());
+       echo "linea del error".$e->getLine();
+       
     }
+   }
 
       
        public function buscarEmpleado($id){
@@ -90,20 +95,7 @@ class Empleado extends Conexion{
 
  
 
-function registrarPago($valor,$fecha,$id_cliente){
-try{
-   
-    $sql = "INSERT INTO pago_empenio VALUES ('', '$valor', '$fecha', '$id_cliente')";
-    $resultado=$this->conexion->prepare($sql);
-    $resultado->execute();
-    echo json_encode('Si');
-      
- }catch(Exception $e){
-    die("Error" . $e->getMessage());
-    echo "linea del error".$e->getLine();
 
- }
-}
 }
 $oEmpleado=new Empleado();
 
@@ -132,7 +124,12 @@ $busE=$oEmpleado->buscarEmpleado($idE);
     }else{
        echo json_encode("Existe");
     }
+}elseif (isset($_POST['inventario'])) {
+   $fechaIn=$_POST['fechaI'];
+   $fechaFi=$_POST['fechaF'];
+  $oEmpleado->crearInventario($fechaIn,$fechaFi);
 }
+
  
 
 ?>
